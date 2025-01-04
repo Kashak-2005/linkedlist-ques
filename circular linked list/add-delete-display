@@ -1,1 +1,211 @@
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class CircularLinkedList {
+    private Node head;
+
+    // Insert at the beginning
+    public void insertAtFirst(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            newNode.next = head;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next != head) {
+            temp = temp.next;
+        }
+
+        newNode.next = head;
+        temp.next = newNode;
+        head = newNode;
+    }
+
+    // Insert at the end
+    public void insertAtLast(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            newNode.next = head;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next != head) {
+            temp = temp.next;
+        }
+
+        temp.next = newNode;
+        newNode.next = head;
+    }
+
+    // Insert at a specific position
+    public void insertAtPosition(int data, int position) {
+        if (position < 1) {
+            System.out.println("Position must be greater than 0.");
+            return;
+        }
+
+        Node newNode = new Node(data);
+
+        if (position == 1) {
+            if (head == null) {
+                head = newNode;
+                newNode.next = head;
+                return;
+            }
+
+            Node temp = head;
+            while (temp.next != head) {
+                temp = temp.next;
+            }
+
+            newNode.next = head;
+            temp.next = newNode;
+            head = newNode;
+            return;
+        }
+
+        Node temp = head;
+        for (int i = 1; i < position - 1; i++) {
+            if (temp.next == head) {
+                System.out.println("Position out of bounds.");
+                return;
+            }
+            temp = temp.next;
+        }
+
+        newNode.next = temp.next;
+        temp.next = newNode;
+    }
+
+    // Delete from the beginning
+    public void deleteFromFirst() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+
+        if (head.next == head) {
+            head = null;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next != head) {
+            temp = temp.next;
+        }
+
+        head = head.next;
+        temp.next = head;
+    }
+
+    // Delete from the end
+    public void deleteFromLast() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+
+        if (head.next == head) {
+            head = null;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next.next != head) {
+            temp = temp.next;
+        }
+
+        temp.next = head;
+    }
+
+    // Delete from a specific position
+    public void deleteFromPosition(int position) {
+        if (position < 1) {
+            System.out.println("Position must be greater than 0.");
+            return;
+        }
+
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+
+        if (position == 1) {
+            if (head.next == head) {
+                head = null;
+                return;
+            }
+
+            Node temp = head;
+            while (temp.next != head) {
+                temp = temp.next;
+            }
+
+            head = head.next;
+            temp.next = head;
+            return;
+        }
+
+        Node temp = head;
+        for (int i = 1; i < position - 1; i++) {
+            if (temp.next == head) {
+                System.out.println("Position out of bounds.");
+                return;
+            }
+            temp = temp.next;
+        }
+
+        if (temp.next == head) {
+            System.out.println("Position out of bounds.");
+        } else {
+            temp.next = temp.next.next;
+        }
+    }
+
+    // Display the list
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+
+        Node temp = head;
+        do {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        } while (temp != head);
+        System.out.println("(head)");
+    }
+
+    public static void main(String[] args) {
+        CircularLinkedList list = new CircularLinkedList();
+
+        list.insertAtFirst(10);
+        list.insertAtLast(20);
+        list.insertAtPosition(15, 2);
+        list.display();
+
+        list.deleteFromFirst();
+        list.display();
+
+        list.deleteFromLast();
+        list.display();
+
+        list.insertAtLast(25);
+        list.insertAtLast(30);
+        list.deleteFromPosition(2);
+        list.display();
+    }
+}
 
