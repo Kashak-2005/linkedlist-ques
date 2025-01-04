@@ -1,1 +1,164 @@
+class Node {
+    int data;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class SinglyLinkedList {
+    private Node head;
+
+    // Insert at the beginning
+    public void insertAtFirst(int data) {
+        Node newNode = new Node(data);
+        newNode.next = head;
+        head = newNode;
+    }
+
+    // Insert at the end
+    public void insertAtLast(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+        temp.next = newNode;
+    }
+
+    // Insert at a specific position
+    public void insertAtPosition(int data, int position) {
+        if (position < 1) {
+            System.out.println("Position must be greater than 0.");
+            return;
+        }
+
+        Node newNode = new Node(data);
+
+        if (position == 1) {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+
+        Node temp = head;
+        for (int i = 1; i < position - 1; i++) {
+            if (temp == null) {
+                System.out.println("Position out of bounds.");
+                return;
+            }
+            temp = temp.next;
+        }
+
+        if (temp == null) {
+            System.out.println("Position out of bounds.");
+        } else {
+            newNode.next = temp.next;
+            temp.next = newNode;
+        }
+    }
+
+    // Delete from the beginning
+    public void deleteFromFirst() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+        head = head.next;
+    }
+
+    // Delete from the end
+    public void deleteFromLast() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+
+        if (head.next == null) {
+            head = null;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next.next != null) {
+            temp = temp.next;
+        }
+        temp.next = null;
+    }
+
+    // Delete from a specific position
+    public void deleteFromPosition(int position) {
+        if (position < 1) {
+            System.out.println("Position must be greater than 0.");
+            return;
+        }
+
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+
+        if (position == 1) {
+            head = head.next;
+            return;
+        }
+
+        Node temp = head;
+        for (int i = 1; i < position - 1; i++) {
+            if (temp == null || temp.next == null) {
+                System.out.println("Position out of bounds.");
+                return;
+            }
+            temp = temp.next;
+        }
+
+        if (temp.next == null) {
+            System.out.println("Position out of bounds.");
+        } else {
+            temp.next = temp.next.next;
+        }
+    }
+
+    // Display the list
+    public void display() {
+        if (head == null) {
+            System.out.println("List is empty.");
+            return;
+        }
+
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+    public static void main(String[] args) {
+        SinglyLinkedList list = new SinglyLinkedList();
+
+        list.insertAtFirst(10);
+        list.insertAtLast(20);
+        list.insertAtPosition(15, 2);
+        list.display();
+
+        list.deleteFromFirst();
+        list.display();
+
+        list.deleteFromLast();
+        list.display();
+
+        list.insertAtLast(25);
+        list.insertAtLast(30);
+        list.deleteFromPosition(2);
+        list.display();
+    }
+}
 
