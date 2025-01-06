@@ -191,9 +191,9 @@ public class CircularLinkedList {
     public static void main(String[] args) {
         CircularLinkedList list = new CircularLinkedList();
 
-        list.insertAtFirst(10);
-        list.insertAtLast(20);
-        list.insertAtPosition(15, 2);
+        list.insertAtFirst(100);
+        list.insertAtLast(200);
+        list.insertAtPosition(150, 2);
         list.display();
 
         list.deleteFromFirst();
@@ -202,8 +202,8 @@ public class CircularLinkedList {
         list.deleteFromLast();
         list.display();
 
-        list.insertAtLast(25);
-        list.insertAtLast(30);
+        list.insertAtLast(250);
+        list.insertAtLast(300);
         list.deleteFromPosition(2);
         list.display();
     }
