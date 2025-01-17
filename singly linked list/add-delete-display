@@ -1,17 +1,13 @@
 class Node {
     int data;
     Node next;
-
     public Node(int data) {
         this.data = data;
         this.next = null;
     }
 }
-
 public class SinglyLinkedList {
     private Node head;
-
-    // Insert at the beginning
     public void insertAtFirst(int data) {
         Node newNode = new Node(data);
         newNode.next = head;
@@ -25,15 +21,12 @@ public class SinglyLinkedList {
             head = newNode;
             return;
         }
-
         Node temp = head;
         while (temp.next != null) {
             temp = temp.next;
         }
         temp.next = newNode;
     }
-
-    // Insert at a specific position
     public void insertAtPosition(int data, int position) {
         if (position < 1) {
             System.out.println("Position must be greater than 0.");
@@ -144,9 +137,9 @@ public class SinglyLinkedList {
     public static void main(String[] args) {
         SinglyLinkedList list = new SinglyLinkedList();
 
-        list.insertAtFirst(10);
-        list.insertAtLast(20);
-        list.insertAtPosition(15, 2);
+        list.insertAtFirst(100);
+        list.insertAtLast(200);
+        list.insertAtPosition(150, 2);
         list.display();
 
         list.deleteFromFirst();
@@ -155,8 +148,8 @@ public class SinglyLinkedList {
         list.deleteFromLast();
         list.display();
 
-        list.insertAtLast(25);
-        list.insertAtLast(30);
+        list.insertAtLast(250);
+        list.insertAtLast(300);
         list.deleteFromPosition(2);
         list.display();
     }
