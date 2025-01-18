@@ -1,1 +1,53 @@
+class CircularNode {
+    int data;
+    CircularNode next;
+
+    CircularNode(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class CircularLinkedList {
+    CircularNode head;
+
+    // Add a node at the end
+    public void append(int data) {
+        CircularNode newNode = new CircularNode(data);
+        if (head == null) {
+            head = newNode;
+            newNode.next = head; // Circular link
+            return;
+        }
+        CircularNode current = head;
+        while (current.next != head) {
+            current = current.next;
+        }
+        current.next = newNode;
+        newNode.next = head; // Circular link
+    }
+
+    // Traverse the circular linked list
+    public void traverse() {
+        if (head == null) return;
+        CircularNode current = head;
+        System.out.print("Circular Linked List: ");
+        do {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        } while (current != head);
+        System.out.println("(back to head)");
+    }
+}
+
+public class CircularLinkedListDemo {
+    public static void main(String[] args) {
+        CircularLinkedList list = new CircularLinkedList();
+        list.append(10);
+        list.append(20);
+        list.append(30);
+        list.append(40);
+        list.traverse();
+    }
+}
 
